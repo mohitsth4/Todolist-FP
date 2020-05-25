@@ -21,7 +21,8 @@ class Todolist extends Component {
               {items.map((item) => {
 								return <Todoitem key={item.id} title={item.title} 
 								handelDelete={() => handelDelete(item.id)}
-								handelEdit={() => handelEdit(item.id)} />;
+                handelEdit={() => handelEdit(item.id)}
+              />
               })}          
 
                { (items.length > 0) &&

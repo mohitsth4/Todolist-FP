@@ -8,8 +8,19 @@ class Home extends Component {
 		items:[],
 		id:uuidv4(),
 		item:'',
-		editItem:false
+		editItem:false,
+		check: false,
+    	strike: 'none'
 	}
+
+	onCheck(item){
+		this.setState({check: !this.state.check})
+		if (this.state.strike === 'none'){
+		  this.setState({strike: 'line-through'})
+		} else {
+		  this.setState({strike: 'none'})
+		}
+	  }
 
 	handleChange = (e) => {
 		this.setState({
@@ -68,7 +79,7 @@ componentWillMount() {
     if (items) {
       this.setState({
         items: JSON.parse(localStorage.getItem('items'))
-      })
+	  })
     }
   }
   componentDidUpdate() {
