@@ -20,19 +20,20 @@ class Home extends Component {
 	handleSubmit = (e) => {
 		e.preventDefault();
 
-		const newItem = {
-			id:this.state.id,
-			title:this.state.item
+		if (this.state.item && this.state.item.trim()) {
+			const newItem = {
+				id:this.state.id,
+				title:this.state.item
+			}
+				const updatedItems = [...this.state.items, newItem];
+				this.setState({
+					items:updatedItems,
+					item:'',
+					id:uuidv4(),
+					editItem:false
+				});
+
 		}
-			const updatedItems = [...this.state.item, newItem];
-
-
-this.setState({
-	items:updatedItems,
-	item:'',
-	id:uuidv4(),
-	editItem:false
-});
 
 	};
 
@@ -56,11 +57,24 @@ handelEdit = (id) => {
 
 	this.setState({
 		items:filteredItems,
-		item: selectedItem.title,
+		item: selectedItem.title.trim(),
 		editItem:false,
 		id:id
 	});
-};
+}
+
+componentWillMount() {
+    let items = localStorage.getItem('items')
+    if (items) {
+      this.setState({
+        items: JSON.parse(localStorage.getItem('items'))
+      })
+    }
+  }
+  componentDidUpdate() {
+    localStorage.setItem('items', JSON.stringify(this.state.items))
+  };
+
 
   render() {
     return (

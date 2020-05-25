@@ -22,12 +22,16 @@ class Todolist extends Component {
 								return <Todoitem key={item.id} title={item.title} 
 								handelDelete={() => handelDelete(item.id)}
 								handelEdit={() => handelEdit(item.id)} />;
-              })}
-              <tr>
-                <td colSpan="4">
-                  <button type="button" className="btn btn-danger" onClick={clearList}>Clear Todo</button>
-                </td>
-              </tr>
+              })}          
+
+               { (items.length > 0) &&
+                  <tr>
+                    <td colSpan="4">
+                      <button type="button" className="btn btn-danger" onClick={clearList}>Clear Todo</button>
+                    </td>
+                  </tr>  
+              }
+
             </tbody>
           </table>
         </div>
